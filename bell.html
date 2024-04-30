@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Bell shedule</title>
+</head>
+<body>
+    <h1></h1>
+    <div class="info"></div>
+    <button onclick="">Refresh</button>
+
+    <script src="data.js"></script>
+    <script>
+        console.log(bellShedule[0]);
+
+        function getCurrentTime() {
+            let now = new Date();
+            let hour = now.getHours().toString().padStart(2,'0'); // 8 ==> 08
+            let min = now.getMinutes().toString().padStart(2,'0');
+            return hour + ":" + min;
+        }
+
+        //első látogatáskor:
+        let actualTime = getCurrentTime();
+        document.querySelector('h1').innerHTML = actualTime;
+
+        function info() {
+            let current = bellShedule.find(obj => actualTime => obj.form && actualTime <= obj.to);
+            let infoStr = '';
+
+            if(current) {
+                infoStr = `Most a/az ${current.id}.óra van és a ${current.to}-ig tart.`;
+            } else {
+                let next = bellShedule.find(obj => actualTime < obj.from)
+                if(next) {
+                    infoStr = `Most szüntet van, a következő óra ${next.from}-kor kezdődik.`;
+                } else {
+                    infoStr = 'Nincs információ...';
+                }
+            }
+            return infoStr;
+        }
+
+        // első látogatáskor:
+        document.querySelector('.info').innerHTML = info();
+
+        function refresh() {
+            actualTime = getCurrentTime();
+            document.querySelector('h1').innerHTML = actualTime;
+            document.querySelector('.info').innerHTML = info();
+        }
+    </script>
+</body>
+</html>

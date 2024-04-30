@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <span>
+            <input type="radio" name="duration" id="h45" value="h45" checked>
+            <label for="h45">45 min</label>
+        </span>
+        <span>
+            <input type="radio" name="duration" id="h40" value="h40">
+            <label for="h40">40 min</label>
+        </span>
+        <span>
+            <input type="radio" name="duration" id="h35" value="h35">
+            <label for="h35">35 min</label>
+        </span>
+    </div>
+
+    <h1></h1>
+    <div class="info"></div>
+    <button onclick="refresh()">Refresh</button>
+
+    <script src="data_radio.js"></script>
+    <script>
+        let bellShedule = [];
+
+        function refresh() {
+            let selectedValue = document.querySelector('input[name="duration"]:checked').value;
+            bellShedule = bellShedules[selectedValue];
+            console.log(bellShedule);
+        }
+    </script>
+</body>
+</html>
